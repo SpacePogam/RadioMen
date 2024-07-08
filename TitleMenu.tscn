@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://djf4rtp6b81h2"]
+
+[ext_resource type="Theme" uid="uid://qxn8ctfpsivs" path="res://Main.tres" id="1_l3pre"]
+[ext_resource type="Script" path="res://start.gd" id="2_31byg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36bua"]
+bg_color = Color(0.00749999, 0.62625, 0.75, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smuxk"]
+bg_color = Color(1, 0.714, 0.22, 1)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(0.72, 0.48672, 0.1368, 1)
+corner_radius_top_left = 96
+corner_radius_top_right = 96
+corner_radius_bottom_right = 96
+corner_radius_bottom_left = 96
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="base" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_36bua")
+
+[node name="gui" type="Panel" parent="base"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = 102.0
+offset_right = -60.0
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_l3pre")
+theme_override_styles/panel = SubResource("StyleBoxFlat_smuxk")
+
+[node name="start" type="Button" parent="base/gui"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -281.5
+offset_top = -354.0
+offset_right = 281.5
+offset_bottom = -161.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "START"
+script = ExtResource("2_31byg")
+
+[node name="Label" type="Label" parent="base/gui"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -379.5
+offset_top = 139.0
+offset_right = 379.5
+offset_bottom = 988.0
+grow_horizontal = 2
+theme = ExtResource("1_l3pre")
+text = "Catch Cylinders!
+
+Please allow your
+device time to
+adjust sensors.
+
+Aim at Cylinders
+and press \"CATCH!\"
+button to catch!"
+horizontal_alignment = 1

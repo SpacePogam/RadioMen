@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://diqyphnax3rqr"]
+
+[ext_resource type="Script" path="res://catchScene.gd" id="1_w6j4a"]
+[ext_resource type="Script" path="res://catch.gd" id="1_ysg6e"]
+[ext_resource type="PackedScene" uid="uid://3eogouh33svo" path="res://npc.tscn" id="2_6ttsj"]
+[ext_resource type="Theme" uid="uid://qxn8ctfpsivs" path="res://Main.tres" id="2_i4q3p"]
+[ext_resource type="Texture2D" uid="uid://bj5ewitu1ixea" path="res://catchbg_pano.png" id="3_yigsj"]
+[ext_resource type="Texture2D" uid="uid://b0cneqsgc8irv" path="res://crosshair.png" id="5_durqg"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_7xy7s"]
+panorama = ExtResource("3_yigsj")
+filter = false
+
+[sub_resource type="Sky" id="Sky_28vjq"]
+sky_material = SubResource("PanoramaSkyMaterial_7xy7s")
+
+[sub_resource type="Environment" id="Environment_pur7q"]
+background_mode = 2
+background_color = Color(0.301946, 0.665867, 0.759149, 1)
+sky = SubResource("Sky_28vjq")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.2
+reflected_light_source = 2
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_w6j4a")
+
+[node name="player" type="Camera3D" parent="."]
+script = ExtResource("1_ysg6e")
+
+[node name="catchRay" type="RayCast3D" parent="player"]
+target_position = Vector3(0, 0, -20)
+
+[node name="npc" parent="." instance=ExtResource("2_6ttsj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.61987)
+
+[node name="env" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pur7q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ui" type="Panel" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -562.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_i4q3p")
+
+[node name="catch" type="Button" parent="CanvasLayer/ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_i4q3p")
+text = "CATCH!"
+
+[node name="crosshair" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_durqg")
+
+[connection signal="pressed" from="CanvasLayer/ui/catch" to="player" method="_on_catch_pressed"]
